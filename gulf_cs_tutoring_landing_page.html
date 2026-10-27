@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أكاديمية علوم الحاسب والبرمجة | للطلاب الجامعيين في الخليج</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Tajawal & Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#0F172A',
+                            900: '#0B1120',
+                            950: '#050B14'
+                        },
+                        emeraldCustom: '#059669',
+                        accentGold: '#F59E0B'
+                    },
+                    fontFamily: {
+                        sans: ['Cairo', 'Tajawal', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background-color: #0F172A;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card-hover:hover {
+            transform: translateY(-6px);
+            border-color: rgba(5, 150, 105, 0.4);
+            box-shadow: 0 20px 25px -5px rgba(5, 150, 105, 0.15), 0 8px 10px -6px rgba(5, 150, 105, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #34D399 0%, #059669 50%, #F59E0B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gradient-btn {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transition: all 0.3s ease;
+        }
+
+        .gradient-btn:hover {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4);
+        }
+
+        .pulse-effect {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px rgba(5, 150, 105, 0.4); }
+            50% { box-shadow: 0 0 30px rgba(5, 150, 105, 0.8); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1120;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #059669;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-emerald-500 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-navy-900 text-emerald-100 text-xs sm:text-sm py-2 px-4 text-center font-medium border-b border-emerald-700/30 flex justify-center items-center gap-2">
+        <span class="bg-emerald-500 text-slate-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase tracking-wider">خصم خاص</span>
+        <span>خصم 20% لطلاب الجامعات الخليجية على باقات المراجعة النهائية ومشاريع التخرج!</span>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-navy-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-emerald-400 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-emerald-900/50">
+                    <i class="fa-solid fa-code"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-black tracking-tight text-white block leading-none" id="nav-brand-name">أكاديمية الحاسب</span>
+                    <span class="text-[10px] text-emerald-400 font-semibold tracking-wider">CS GULF ACADEMY</span>
+                </div>
+            </div>
+
+            <!-- Nav Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#hero" class="hover:text-emerald-400 transition-colors">الرئيسية</a>
+                <a href="#courses" class="hover:text-emerald-400 transition-colors">المواد الدراسية</a>
+                <a href="#features" class="hover:text-emerald-400 transition-colors">لماذا نحن؟</a>
+                <a href="#calculator" class="hover:text-emerald-400 transition-colors">حاسبة الأسعار</a>
+                <a href="#how-it-works" class="hover:text-emerald-400 transition-colors">كيف نبدأ؟</a>
+                <a href="#testimonials" class="hover:text-emerald-400 transition-colors">آراء الطلاب</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <button onclick="openCustomizer()" class="p-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 border border-slate-700 transition" title="لوحة التعديل المباشر">
+                    <i class="fa-solid fa-sliders text-lg"></i>
+                </button>
+
+                <a id="btn-header-wa" href="https://wa.me/966500000000?text=%D0%A3%D1%80%D0%B7%D0%A7%20%D0%A3%D1%81%D1%82%D1%84%D1%81%D0%B0%D1%81%20%D0%B9%D0%BD%20%D0%A7%D0%BB%D1%85%D0%B5%D0%B5%D0%B7" target="_blank" class="flex items-center gap-2 bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 px-4 py-2.5 rounded-xl text-sm font-bold transition">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span class="hidden sm:inline">تواصل واتساب</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+        <!-- Glow Backdrop -->
+        <div class="absolute top-1/4 right-1/2 translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-1/3 left-10 w-[300px] h-[300px] bg-amber-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/80 border border-slate-700/80 mb-8 shadow-inner">
+                <span class="flex h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-xs font-bold text-slate-300">مخصص لطلاب جامعات السعودية، الإمارات، الكويت، قطر، عمان، والبحرين</span>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight max-w-5xl mx-auto mb-6">
+                تفوق في مواد <span class="gradient-text">الحاسب والبرمجة</span> <br class="hidden sm:block">مع تطبيق وتأسيس عملي 1-on-1
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-lg sm:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10 font-normal">
+                شرح خاص ومبسط لمناهج علوم الحاسب، خوارزميات وهياكل البيانات، اللغات (Python, C++, Java)، وتكليفات المشاريع مع مهندسين متخصصين لمساعدتك في الحصول على <strong class="text-amber-400 font-extrabold">+A</strong>.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto mb-16">
+                <a id="hero-btn-calendly" href="#booking-modal" onclick="openBookingModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl font-extrabold text-base text-white gradient-btn shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-3 group">
+                    <i class="fa-regular fa-calendar-check text-xl"></i>
+                    <span>احجز حصة تجريبية / استشارة</span>
+                    <i class="fa-solid fa-arrow-left group-hover:-translate-x-1 transition-transform"></i>
+                </a>
+                <a id="hero-btn-wa" href="https://wa.me/966500000000" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-base text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 flex items-center justify-center gap-3 transition">
+                    <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
+                    <span>استفسر مباشرة عبر واتساب</span>
+                </a>
+            </div>
+
+            <!-- Trust Badges (Gulf Universities) -->
+            <div class="border-t border-slate-800/80 pt-10">
+                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-6">نساعد طلاب أحدث المناهج في كبرى الجامعات الخليجية</p>
+                <div class="flex flex-wrap items-center justify-center gap-6 sm:gap-10 opacity-70 grayscale hover:grayscale-0 transition-all duration-300 text-slate-300 font-bold text-sm">
+                    <div class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-800"><i class="fa-solid fa-graduation-cap text-emerald-400"></i> جامعة الملك سعود (KSU)</div>
+                    <div class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-800"><i class="fa-solid fa-graduation-cap text-emerald-400"></i> جامعة الملك فهد (KFUPM)</div>
+                    <div class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-800"><i class="fa-solid fa-graduation-cap text-emerald-400"></i> جامعة الكويت (KU)</div>
+                    <div class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-800"><i class="fa-solid fa-graduation-cap text-emerald-400"></i> جامعة الإمارات (UAEU)</div>
+                    <div class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-800"><i class="fa-solid fa-graduation-cap text-emerald-400"></i> جامعة قطر (QU)</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Subjects / Courses Section -->
+    <section id="courses" class="py-20 bg-navy-900/50 relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4">المواد والدورات المتاحة</h2>
+                <p class="text-slate-400">نغطي كافة التخصصات البرمجية والهندسية للحاسب الآلي وفق السلابس المعتمَد في جامعتك.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-500 group-hover:text-slate-950 transition-colors">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">هياكل البيانات والخوارزميات (Data Structures & Algorithms)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        شرح Arrays, Linked Lists, Trees, Graphs, Sorting, Time Complexity (Big O) والتطبيق العملي بكل سهولة.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-emerald-400">
+                        <span>C++ / Java / Python</span> • <span>مستوى متقدم</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors">
+                        <i class="fa-brands fa-python"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">برمجة بايثون وتطوير الويب (Python & Django)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        تأسيس كامل من الصفر إلى احتراف تطوير التطبيقات والمواقع باستخدام Python, Django, و Web APIs.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-amber-400">
+                        <span>Python 3</span> • <span>مشاريع عملية</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-blue-500 group-hover:text-slate-950 transition-colors">
+                        <i class="fa-solid fa-cubes"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">البرمجة الشيئية وقواعد البيانات (OOP & SQL Databases)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        مفاهيم Inheritance, Polymorphism, Abstraction مع تصميم ERD وقواعد البيانات SQL و MySQL.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-blue-400">
+                        <span>Java / C# / SQL</span> • <span>تطبيقات شاملة</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-500 group-hover:text-slate-950 transition-colors">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">أنظمة التشغيل والشبكات (Operating Systems & Networks)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        فهم Processes, Threads, Memory Management, CPU Scheduling وبروتوكولات الشبكات TCP/IP.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-purple-400">
+                        <span>نظري وعملي</span> • <span>حل اختبارات</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group">
+                    <div class="w-14 h-14 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400 flex items-center justify-center text-2xl mb-6 group-hover:bg-rose-500 group-hover:text-slate-950 transition-colors">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">مساعدة في مشاريع التخرج والتكليفات (Senior Projects)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        مساعدة خطوة بخطوة في بناء مشاريع جامعية كاملة، كتابة التوثيق (Documentation)، والتحضير للمناقشة.
+                    </p>
+                    <div class="flex items-center gap-2 text-xs font-semibold text-rose-400">
+                        <span>إشراف كامل</span> • <span>دعم مباشر</span>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass-card glass-card-hover p-8 rounded-2xl relative overflow-hidden group border-dashed border-emerald-500/40 bg-emerald-950/20">
+                    <div class="w-14 h-14 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">مادة خاصة من منهجك؟</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        أرسل لنا السلابس (Syllabus) الخاص بجامعتك وسنقوم بتوفير شرح مخصص لك 100%.
+                    </p>
+                    <a href="https://wa.me/966500000000?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%B1%D9%8A%D8%AF%20%D8%B4%D8%B1%D8%AD%20%D9%85%D8%A7%D8%AF%D8%A9%20%D8%AE%D8%A7%D8%B5%D8%A9" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 hover:text-emerald-300">
+                        <span>ارسل السلابس عبر واتساب</span>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Features -->
+    <section id="features" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <span class="text-emerald-400 text-sm font-extrabold uppercase tracking-widest block mb-2">مميزاتنا الاستثنائية</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-white mb-6 leading-tight">
+                        لماذا يفضل طلاب الخليج التعلم معنا للتفوق الجامعي؟
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl font-bold border border-emerald-500/20">
+                                1
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-1">شرح متوافق 100% مع منهج جامعتك</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">نحن لا نقدم شرحاً عاماً، بل نراجع سلايدات وسلايلك جامعتك ونركز على الأسئلة المتكررة في الاختبارات السابقة (Past Papers).</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold border border-amber-500/20">
+                                2
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-1">جلسات أونلاين خاصة (1-on-1)</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">ركز مع المهندس في جلسة تفاعلية مباشرة عبر Zoom أو Teams مع إمكانية تسجيل الحصص لإعادة مشاهدتها أي وقت.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-xl font-bold border border-blue-500/20">
+                                3
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-1">حل الواجبات وتصحيح الكود خطوة بخطوة</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">نعلمك كيف تفكر وتكتب الكود بنفسك بدون أخطاء، ونساعدك في تسليم الواجبات والتكليفات بوقتها لتضمن العلامة الكاملة.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-xl font-bold border border-purple-500/20">
+                                4
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white mb-1">مرونة كاملة في المواعيد</h4>
+                                <p class="text-slate-400 text-sm leading-relaxed">تناسب المواعيد الجدول الجامعي والظروف الخاصة بك مع إمكانية التنسيق المباشر عبر Calendly و WhatsApp.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Preview / Visual Illustration -->
+                <div class="relative">
+                    <div class="glass-card rounded-2xl p-6 shadow-2xl border border-slate-700 relative">
+                        <!-- Code Header -->
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-700/80 mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                            </div>
+                            <span class="text-xs text-slate-400 font-mono">solution.py — Top_Grade_Student</span>
+                        </div>
+                        
+                        <!-- Code Snippet -->
+                        <pre class="font-mono text-xs sm:text-sm text-slate-300 leading-relaxed overflow-x-auto dir-ltr text-left">
+<span class="text-purple-400">class</span> <span class="text-yellow-300">GulfStudent</span>:
+    <span class="text-purple-400">def</span> <span class="text-blue-400">__init__</span>(self, name, university):
+        self.name = name
+        self.university = university
+        self.grade = <span class="text-emerald-400">"A+"</span>
+
+    <span class="text-purple-400">def</span> <span class="text-blue-400">achieve_success</span>(self):
+        <span class="text-purple-400">return</span> <span class="text-emerald-400">f"{self.name} got {self.grade} in Computer Science!"</span>
+
+<span class="text-slate-500"># Start your journey to A+</span>
+student = GulfStudent(<span class="text-emerald-400">"أحمد العتيبي"</span>, <span class="text-emerald-400">"KSU"</span>)
+print(student.achieve_success())
+                        </pre>
+                        
+                        <!-- Success Banner Badge inside mockup -->
+                        <div class="mt-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between text-right">
+                            <div>
+                                <div class="text-sm font-bold text-white">درجة ممتازة مضمونة باجتهادك معنا</div>
+                                <div class="text-xs text-slate-400">متابعة دورية وتدريب على الأسئلة المتوقعة</div>
+                            </div>
+                            <i class="fa-solid fa-award text-3xl text-amber-400"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Fee & Currency Calculator -->
+    <section id="calculator" class="py-20 bg-navy-900/60 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-amber-400 text-sm font-extrabold uppercase tracking-widest block mb-2">شفافية كاملة</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">حاسبة التكلفة والعملات التفاعلية</h2>
+                <p class="text-slate-400 mt-2">اختر عدد الساعات والعملة الخاصة بدولتك لمعرفة السعر المباشر</p>
+            </div>
+
+            <div class="glass-card p-8 sm:p-10 rounded-3xl border border-slate-700 shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    
+                    <!-- Controls -->
+                    <div class="space-y-6">
+                        <!-- Hours Slider -->
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-bold text-slate-200">عدد الحصص/الساعات المطلوبة:</label>
+                                <span id="calc-hours-val" class="text-xl font-extrabold text-emerald-400">5 ساعات</span>
+                            </div>
+                            <input type="range" id="hours-range" min="1" max="20" value="5" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                            <div class="flex justify-between text-[11px] text-slate-500 mt-1">
+                                <span>1 ساعة (سريعة)</span>
+                                <span>10 ساعات (باقة كاملة)</span>
+                                <span>20 ساعة (مادة كاملة)</span>
+                            </div>
+                        </div>
+
+                        <!-- Currency Selector -->
+                        <div>
+                            <label class="block text-sm font-bold text-slate-200 mb-2">اختر عملة بلدك:</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <button onclick="selectCurrency('SAR', 150)" class="currency-btn bg-emerald-600 text-white font-bold py-2.5 px-3 rounded-xl border border-emerald-500 text-xs text-center transition">
+                                    🇸🇦 ريال سعودي (SAR)
+                                </button>
+                                <button onclick="selectCurrency('AED', 147)" class="currency-btn bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold py-2.5 px-3 rounded-xl border border-slate-700 text-xs text-center transition">
+                                    🇦🇪 درهم إماراتي (AED)
+                                </button>
+                                <button onclick="selectCurrency('KWD', 12)" class="currency-btn bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold py-2.5 px-3 rounded-xl border border-slate-700 text-xs text-center transition">
+                                    🇰🇼 دينار كويتي (KWD)
+                                </button>
+                                <button onclick="selectCurrency('USD', 40)" class="currency-btn bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold py-2.5 px-3 rounded-xl border border-slate-700 text-xs text-center transition">
+                                    🇺🇸 دولار أمريكي (USD)
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="text-xs text-slate-400 bg-slate-800/40 p-3 rounded-xl border border-slate-800">
+                            <i class="fa-solid fa-circle-info text-amber-400 ml-1"></i>
+                            خصم تلقائي 15% يطبق عند اختيار 10 ساعات أو أكثر!
+                        </div>
+                    </div>
+
+                    <!-- Price Display & Direct Booking -->
+                    <div class="bg-gradient-to-br from-slate-900 to-navy-950 p-8 rounded-2xl border border-slate-800 text-center relative overflow-hidden flex flex-col justify-center items-center">
+                        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">المبلغ الإجمالي المنسق</span>
+                        
+                        <div class="my-4">
+                            <span id="calc-total-price" class="text-5xl font-black text-emerald-400">750</span>
+                            <span id="calc-currency-code" class="text-xl font-bold text-slate-300 mr-2">SAR</span>
+                        </div>
+
+                        <p class="text-xs text-slate-400 mb-6">يشمل: مواد الشرح، حل التطبيقات، وتسجيلات الحصص</p>
+
+                        <button onclick="openBookingModal()" class="w-full py-3.5 rounded-xl font-extrabold text-sm text-slate-950 bg-amber-400 hover:bg-amber-300 transition shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-bolt"></i>
+                            <span>احجز هذه الباقة الآن</span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works (4 Simple Steps) -->
+    <section id="how-it-works" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-400 text-sm font-extrabold uppercase tracking-widest block mb-2">خطوات بسيطة وميسرة</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">كيف تبدأ رحلة التفوق معنا؟</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Step 1 -->
+                <div class="glass-card p-6 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-emerald-500 text-slate-950 font-black text-lg flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/30">
+                        1
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">اختر الموعد (Calendly)</h3>
+                    <p class="text-slate-400 text-sm">حدد الوقت والمواضيع التي تحتاجها من خلال حجز استشارة أو حصة في التقويم.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card p-6 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-emerald-500 text-slate-950 font-black text-lg flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/30">
+                        2
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">التأكيد (WhatsApp)</h3>
+                    <p class="text-slate-400 text-sm">تواصل معنا تأكيداً للموعد وإرسال السلايدات والتكليفات المطلوبة لشرحها.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card p-6 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-emerald-500 text-slate-950 font-black text-lg flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/30">
+                        3
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">سداد الرسوم (Xpay)</h3>
+                    <p class="text-slate-400 text-sm">سدد بكل أمان عبر رابط الدفع الإلكتروني المباشر ببطاقتك البنكية أو مدى.</p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="glass-card p-6 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-amber-400 text-slate-950 font-black text-lg flex items-center justify-center mb-4 shadow-lg shadow-amber-500/30">
+                        4
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">ابدأ الحصة وتفوق!</h3>
+                    <p class="text-slate-400 text-sm">انضم للجلسة المباشرة، احصل على الفهم الكامل، واحصد درجة +A بجدية.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Success Stories -->
+    <section id="testimonials" class="py-20 bg-navy-900/40 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-400 text-sm font-extrabold uppercase tracking-widest block mb-2">قصص نجاح أبطالنا</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">ماذا يقول طلاب الجامعات الخليجية؟</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Review 1 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        "كنت معقد جداً من مادة Data Structures والـ Recursion، المهندس شرحلي المفاهيم بصورة مبسطة جداً وجبت بالفاينل A+. أعظم تجربة تعليمية!"
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-emerald-600/30 text-emerald-400 font-bold flex items-center justify-center">فـ</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">فيصل الشمري</div>
+                            <div class="text-xs text-slate-400">جامعة الملك سعود - KSU 🇸🇦</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        "ساعدوني في مشروع التخرج الخاص بالذكاء الاصطناعي وبايثون. الشرح كان عميق جداً والدفاع أمام اللجنة كان ممتاز وسهل بفضلهم."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-600/30 text-blue-400 font-bold flex items-center justify-center">مـ</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">مريم الكندري</div>
+                            <div class="text-xs text-slate-400">جامعة الكويت - KU 🇰🇼</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="glass-card p-8 rounded-2xl relative">
+                    <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-slate-300 text-sm leading-relaxed mb-6">
+                        "الالتزام بالمواعيد وسهولة الحجز والتأكيد عبر الواتساب مررة مريحة. المدرس ممتاز وحلينا كل الكويزات السابقة سوا."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-purple-600/30 text-purple-400 font-bold flex items-center justify-center">سـ</div>
+                        <div>
+                            <div class="text-sm font-bold text-white">سلطان المزروعي</div>
+                            <div class="text-xs text-slate-400">جامعة الإمارات - UAEU 🇦🇪</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Banner -->
+    <section class="py-16 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-emerald-800 to-emerald-950 p-10 sm:p-14 rounded-3xl border border-emerald-500/30 text-center relative overflow-hidden shadow-2xl">
+                <h2 class="text-3xl sm:text-5xl font-black text-white mb-4">جاهز لتحقيق A+ هذا الفصل؟</h2>
+                <p class="text-emerald-100 max-w-2xl mx-auto text-base sm:text-lg mb-8">احجز حصتك الاستشارية الآن واستمتع بشرح مخصص يضمن لك الفهم الكامل والتفوق الدراسي.</p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="openBookingModal()" class="px-8 py-4 rounded-xl font-black text-slate-950 bg-amber-400 hover:bg-amber-300 transition shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-regular fa-calendar-check"></i>
+                        <span>احجز الآن عبر Calendly</span>
+                    </button>
+                    <a id="cta-bottom-wa" href="https://wa.me/966500000000" target="_blank" class="px-8 py-4 rounded-xl font-bold text-white bg-slate-900 hover:bg-slate-800 border border-slate-700 flex items-center justify-center gap-2 transition">
+                        <i class="fa-brands fa-whatsapp text-emerald-400"></i>
+                        <span>محادثة مباشرة واتساب</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-navy-950 border-t border-slate-800 py-12 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-right flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="text-white font-bold text-lg block" id="footer-brand-name">أكاديمية علوم الحاسب الخليجية</span>
+                <p class="text-xs text-slate-500 mt-1">جميع الحقوق محفوظة © 2026 — متخصصون في تدريس مناهج الحاسب الجامعية.</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="#hero" class="hover:text-emerald-400 text-xs">الرئيسية</a>
+                <a href="#courses" class="hover:text-emerald-400 text-xs">المواد</a>
+                <a href="#calculator" class="hover:text-emerald-400 text-xs">الحاسبة</a>
+                <button onclick="openCustomizer()" class="hover:text-amber-400 text-xs text-amber-400">لوحة التعديل</button>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- MODAL: BOOKING & PAYMENT DIALOG -->
+    <div id="booking-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-navy-900 border border-slate-700 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative flex flex-col max-h-[90vh]">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+                <h3 class="text-xl font-extrabold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-days text-emerald-400"></i>
+                    <span>حجز موعد وسداد الرسوم</span>
+                </h3>
+                <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="p-6 overflow-y-auto space-y-6 text-right">
+                
+                <!-- Step 1 Embed/Button: Calendly -->
+                <div class="bg-slate-800/40 border border-slate-700/60 p-5 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="bg-emerald-500/10 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full border border-emerald-500/20">الخطوة 1</span>
+                        <i class="fa-regular fa-calendar-alt text-2xl text-emerald-400"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-1">اختر موعد الحصة عبر Calendly</h4>
+                    <p class="text-xs text-slate-400 mb-4">اختر اليوم والساعة المناسبة لك مباشرة على التقويم الخاص بالمعلم.</p>
+                    <a id="modal-calendly-link" href="https://calendly.com" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-bold rounded-xl transition">
+                        <span>فتح تقويم Calendly للحجز</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Step 2: WhatsApp confirmation -->
+                <div class="bg-slate-800/40 border border-slate-700/60 p-5 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="bg-blue-500/10 text-blue-400 text-xs font-bold px-3 py-1 rounded-full border border-blue-500/20">الخطوة 2</span>
+                        <i class="fa-brands fa-whatsapp text-2xl text-emerald-400"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-1">تأكيد الموعد وإرسال السلابس</h4>
+                    <p class="text-xs text-slate-400 mb-4">بعد اختيار الموعد، تواصل معنا فوراً على الواتساب مع إرسال تفاصيل المادة والتكليف.</p>
+                    <a id="modal-wa-link" href="https://wa.me/966500000000" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-3 bg-slate-800 hover:bg-slate-700 border border-emerald-500/30 text-emerald-400 text-sm font-bold rounded-xl transition">
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                        <span>تأكيد الموعد عبر WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Step 3: Xpay payment -->
+                <div class="bg-slate-800/40 border border-slate-700/60 p-5 rounded-2xl">
+                    <div class="flex items-start justify-between mb-3">
+                        <span class="bg-amber-500/10 text-amber-400 text-xs font-bold px-3 py-1 rounded-full border border-amber-500/20">الخطوة 3</span>
+                        <i class="fa-solid fa-credit-card text-2xl text-amber-400"></i>
+                    </div>
+                    <h4 class="text-base font-bold text-white mb-1">سداد الرسوم بأمان (Xpay Integration)</h4>
+                    <p class="text-xs text-slate-400 mb-4">سدد رسوم الحصة عبر بوابة Xpay الآمنة بدعم كامل لبطاقات مدى، الفيزا والماستركارد.</p>
+                    <a id="modal-xpay-link" href="https://xpay.app" target="_blank" class="inline-flex items-center justify-center gap-2 w-full py-3 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 text-sm font-extrabold rounded-xl transition shadow-lg">
+                        <i class="fa-solid fa-lock text-xs"></i>
+                        <span>الدفع الآن عبر Xpay</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- INTERACTIVE CUSTOMIZATION DRAWER (LIVE EDIT PANEL) -->
+    <div id="customizer-drawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-navy-950 border-l border-slate-800 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out p-6 overflow-y-auto">
+        <div class="flex items-center justify-between pb-6 border-b border-slate-800 mb-6">
+            <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
+                <i class="fa-solid fa-sliders text-amber-400"></i>
+                <span>لوحة التعديل السريع المباشرة</span>
+            </h3>
+            <button onclick="closeCustomizer()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <p class="text-xs text-slate-400 mb-6 leading-relaxed">
+            عدّل الروابط وأرقام التواصل والنصوص مباشرة لتعاين موقعك قبل رفعه على <strong>GitHub Pages</strong>!
+        </p>
+
+        <form onsubmit="event.preventDefault(); applyCustomizations();" class="space-y-4 text-right">
+            
+            <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">اسم الأكاديمية / المدرس:</label>
+                <input type="text" id="cust-brand-name" value="أكاديمية علوم الحاسب" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">رقم الواتساب (شاملاً كود الدولة):</label>
+                <input type="text" id="cust-wa-num" value="966500000000" placeholder="966500000000" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 dir-ltr text-left">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">رابط Calendly الخـاص بك:</label>
+                <input type="url" id="cust-calendly-url" value="https://calendly.com" placeholder="https://calendly.com/your-name" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 dir-ltr text-left">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-300 mb-1">رابط بوابة Xpay للدفع:</label>
+                <input type="url" id="cust-xpay-url" value="https://xpay.app" placeholder="https://xpay.app/pay/..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-emerald-500 dir-ltr text-left">
+            </div>
+
+            <div class="pt-4">
+                <button type="submit" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-sm rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-check"></i>
+                    <span>تطبيق التعديلات الآن</span>
+                </button>
+            </div>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-slate-800 text-xs text-slate-500 space-y-2">
+            <p>💡 <strong>طريقة التعديل الدائم في الكود:</strong></p>
+            <p>ابحث في كود الملف عن <code>966500000000</code> واستبدله برقمك، واستبدل روابط Calendly و Xpay بروابطك الخاصة.</p>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Currency Calculator Logic
+        let currentRate = 150; // default SAR hourly rate
+        let currentCode = 'SAR';
+
+        const hoursRange = document.getElementById('hours-range');
+        const hoursValDisplay = document.getElementById('calc-hours-val');
+        const totalPriceDisplay = document.getElementById('calc-total-price');
+        const currencyCodeDisplay = document.getElementById('calc-currency-code');
+
+        function updateCalculator() {
+            const hours = parseInt(hoursRange.value);
+            hoursValDisplay.textContent = hours + (hours === 1 ? ' ساعة' : ' ساعات');
+
+            let total = hours * currentRate;
+            
+            // Apply 15% discount for 10 hours or more
+            if (hours >= 10) {
+                total = Math.round(total * 0.85);
+            }
+
+            totalPriceDisplay.textContent = total.toLocaleString('ar-EG');
+            currencyCodeDisplay.textContent = currentCode;
+        }
+
+        hoursRange.addEventListener('input', updateCalculator);
+
+        function selectCurrency(code, rate) {
+            currentCode = code;
+            currentRate = rate;
+            
+            // Highlight button
+            document.querySelectorAll('.currency-btn').forEach(btn => {
+                if (btn.textContent.includes(code)) {
+                    btn.className = 'currency-btn bg-emerald-600 text-white font-bold py-2.5 px-3 rounded-xl border border-emerald-500 text-xs text-center transition';
+                } else {
+                    btn.className = 'currency-btn bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold py-2.5 px-3 rounded-xl border border-slate-700 text-xs text-center transition';
+                }
+            });
+
+            updateCalculator();
+        }
+
+        // Modal Controls
+        const bookingModal = document.getElementById('booking-modal');
+
+        function openBookingModal() {
+            bookingModal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeBookingModal() {
+            bookingModal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // Customizer Drawer Controls
+        const customizerDrawer = document.getElementById('customizer-drawer');
+
+        function openCustomizer() {
+            customizerDrawer.classList.remove('translate-x-full');
+        }
+
+        function closeCustomizer() {
+            customizerDrawer.classList.add('translate-x-full');
+        }
+
+        // Apply Customizer Panel Values Dynamic Update
+        function applyCustomizations() {
+            const brandName = document.getElementById('cust-brand-name').value;
+            const waNum = document.getElementById('cust-wa-num').value;
+            const calendlyUrl = document.getElementById('cust-calendly-url').value;
+            const xpayUrl = document.getElementById('cust-xpay-url').value;
+
+            // Update Brand Text
+            if(brandName) {
+                document.getElementById('nav-brand-name').textContent = brandName;
+                document.getElementById('footer-brand-name').textContent = brandName;
+            }
+
+            // Update WhatsApp links
+            const waText = encodeURIComponent("مرحباً، أود الاستفسار وحجز حصة شرح في علوم الحاسب");
+            const fullWaUrl = `https://wa.me/${waNum}?text=${waText}`;
+
+            document.getElementById('btn-header-wa').href = fullWaUrl;
+            document.getElementById('hero-btn-wa').href = fullWaUrl;
+            document.getElementById('cta-bottom-wa').href = fullWaUrl;
+            document.getElementById('modal-wa-link').href = fullWaUrl;
+
+            // Update Calendly Link
+            document.getElementById('modal-calendly-link').href = calendlyUrl;
+
+            // Update Xpay Link
+            document.getElementById('modal-xpay-link').href = xpayUrl;
+
+            closeCustomizer();
+        }
+
+        // Initial Calculation Run
+        updateCalculator();
+    </script>
+</body>
+</html>
